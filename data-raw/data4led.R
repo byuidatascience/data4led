@@ -44,7 +44,8 @@ led_study <- dat %>%
          hours = ifelse(hours < 10, 0, hours)) %>%
   ungroup() %>%
   filter(hours > 25 | hours < 10) %>%
-  as_tibble()
+  as_tibble() %>%
+  mutate(hours = ifelse(hours == 191, 192, hours))
 
 led_study_details <- list(id = "An id for each LED light measured",
                           hours = "The number of hours since the first measurement",
@@ -88,7 +89,7 @@ dpr_export(led_study, export_folder = path(package_path, "data-raw"),
 dpr_export(led_testing, export_folder = path(package_path, "data-raw"), 
            export_format = c(".csv", ".json", ".xlsx", ".sav", ".dta"))
 
-usethis::use_data(led_study, led_testing)
+usethis::use_data(led_study, led_testing, overwrite = TRUE)
 
 dpr_document(led_study, extension = ".md.R", export_folder = usethis::proj_get(),
              object_name = "led_study", title = "LED example bulbs of lumen output",
