@@ -6,19 +6,19 @@
 \usage{
 led_bulb(
   number_bulbs = 1,
-  seed = 9012007,
+  seed = 9012017,
   dat = data4led::led_study,
   columns_keep = c("id", "hours", "intensity", "percent_intensity")
 )
 }
 \arguments{
-\item{number_bulbs}{The number of bulbs to sample. Defaults to 1.}
+\item{number_bulbs}{The number of bulbs to sample. Defaults to 1. The most changed argument to the function.}
 
 \item{seed}{is used to make the random sample reproducible.  May change at teacher request.}
 
 \item{dat}{is the data object from which the sample is taken.  Defaults to led_study.}
 
-\item{columns_keep}{are the columns that should be returned from dat.}
+\item{columns_keep}{are the columns that should be returned from dat. Defaults to keep all the columns.}
 }
 \description{
 A function to standardize the random selection of bulbs for the LED project in BYUI's MATH 119.
