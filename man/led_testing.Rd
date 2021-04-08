@@ -9,7 +9,8 @@ A data frame with columns:
 \describe{
  \item{id}{The variable is numeric. An id for each LED light measured}
  \item{hours}{The variable is numeric. The number of hours since the first measurement}
- \item{percent_intensity}{The variable is numeric. The percent light output based on the first measured intensity of the bulb}
+ \item{normalized_intensity}{The variable is numeric. The normalized light output based on the first measured intensity of the bulb}
+ \item{percent_intensity}{The variable is numeric. The normalized_intensity multiplied by 100}
  \item{company}{The variable is character. Either A or B to represent to different company products}
 }
 }

@@ -1,4 +1,5 @@
 ### Build LED data package for use with Math 119
+# See data_led_private repo
 pacman::p_load(tidyverse, glue, readxl, fs)
 pacman::p_load_gh("byuidss/DataPushR")
 
@@ -17,12 +18,15 @@ led_testing <- dat_list %>%
                     values_to = "percent_intensity")) %>%
   bind_rows() %>%
   mutate(company = ifelse(str_detect(id, "AAA"), "A", "B"),
-         id = parse_number(id)) %>%
-  select(id, hours = Hours, percent_intensity, company)
+         id = parse_number(id),
+         normalized_intensity = percent_intensity,
+         percent_intensity = 100*normalized_intensity) %>%
+  select(id, hours = Hours, normalized_intensity, percent_intensity, company)
 
 led_test_details <- list(id = "An id for each LED light measured",
                          hours = "The number of hours since the first measurement",
-                         percent_intensity = "The percent light output based on the first measured intensity of the bulb",
+                         normalized_intensity = "The normalized light output based on the first measured intensity of the bulb",
+                         percent_intensity = "The normalized_intensity multiplied by 100",
                          company = "Either A or B to represent to different company products")
 
 
@@ -40,17 +44,20 @@ led_study <- dat %>%
   mutate(hours = floor(hours)) %>%
   group_by(id) %>%
   mutate(intensity = intensity + rnorm(n(), mean = 0, sd = .25),
-         percent_intensity = intensity / intensity[1],
+         normalized_intensity = intensity / intensity[1],
+         percent_intensity = normalized_intensity*100,
          hours = ifelse(hours < 10, 0, hours)) %>%
   ungroup() %>%
   filter(hours > 25 | hours < 10) %>%
   as_tibble() %>%
-  mutate(hours = ifelse(hours == 191, 192, hours))
+  mutate(hours = ifelse(hours == 191, 192, hours)) %>%
+  select(id, hours, intensity, normalized_intensity, percent_intensity)
 
 led_study_details <- list(id = "An id for each LED light measured",
                           hours = "The number of hours since the first measurement",
                           intensity = "The lumen output of the bulb. 800 lumens maps to a 60 watt incandescent bulb (https://www.lumens.com/how-tos-and-advice/light-bulb-facts.html)",
-                          percent_intensity = "The percent light output based on the first measured intensity of the bulb")
+                          normalized_intensity = "The normalized light output based on the first measured intensity of the bulb",
+                          percent_intensity = "The normalized_intensity multiplied by 100")
 
 
 list_data = list(led_study = led_study, led_testing = led_testing)

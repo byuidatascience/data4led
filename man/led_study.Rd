@@ -10,7 +10,8 @@ A data frame with columns:
  \item{id}{The variable is integer. An id for each LED light measured}
  \item{hours}{The variable is numeric. The number of hours since the first measurement}
  \item{intensity}{The variable is numeric. The lumen output of the bulb. 800 lumens maps to a 60 watt incandescent bulb (https://www.lumens.com/how-tos-and-advice/light-bulb-facts.html)}
- \item{percent_intensity}{The variable is numeric. The percent light output based on the first measured intensity of the bulb}
+ \item{normalized_intensity}{The variable is numeric. The normalized light output based on the first measured intensity of the bulb}
+ \item{percent_intensity}{The variable is numeric. The normalized_intensity multiplied by 100}
 }
 }
 \source{
