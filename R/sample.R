@@ -8,7 +8,8 @@
 #' @examples led_bulb(2, seed = 1976)
 #' @export
 led_bulb <- function(number_bulbs = 1, seed = 09012017, dat = data4led::led_study,
-                     columns_keep = c("id", "hours", "intensity", "percent_intensity")) {
+                     columns_keep = c("id", "hours", "intensity", 
+                                      "normalized_intensity", "percent_intensity")) {
   
   # funciton has default seed.  Teacher can us this to give each 
   # student a random bulb that is retrievable.

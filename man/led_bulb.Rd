@@ -8,7 +8,8 @@ led_bulb(
   number_bulbs = 1,
   seed = 9012017,
   dat = data4led::led_study,
-  columns_keep = c("id", "hours", "intensity", "percent_intensity")
+  columns_keep = c("id", "hours", "intensity", "normalized_intensity",
+    "percent_intensity")
 )
 }
 \arguments{
